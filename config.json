@@ -1,0 +1,10 @@
+{
+  "defaultCols": 16,
+  "defaultRows": 16,
+  "historyLimit": 60,
+  "presetColors": [
+    "#000000", "#ffffff", "#8a8a9c", "#ff5d8f", "#ff9f5d", "#ffe45d",
+    "#7ee8c1", "#5dc9ff", "#5d7bff", "#b25dff", "#ff5d5d", "#5dffb2",
+    "#c98a4b", "#2f2f3a", "#ffd1e6", "#d1fff0"
+  ]
+}

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pixel Art Studio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="app">
+  <header class="app-title"><span class="dot"></span> PIXEL ART STUDIO</header>
+
+  <main class="content">
+    <div class="canvas-wrap">
+      <div id="pixelGrid" class="pixel-grid"></div>
+      <div id="lockOverlay" class="lock-overlay">🔒 CANVAS ĐÃ KHÓA</div>
+    </div>
+  </main>
+
+  <div id="resizeHandle" class="resize-handle" title="Kéo để chỉnh chiều cao footer"></div>
+
+  <footer class="footer">
+    <nav class="tabs">
+      <button class="tab-btn active" data-tab="canvas">Canvas</button>
+      <button class="tab-btn" data-tab="draw">Draw</button>
+      <button class="tab-btn" data-tab="select">Chọn</button>
+      <button class="tab-btn" data-tab="zoom">Zoom</button>
+    </nav>
+
+    <div class="tab-content">
+
+      <section id="panel-canvas" class="tab-panel active">
+        <div class="field">
+          <label for="inputCols">Rộng (cột)</label>
+          <input type="number" id="inputCols" min="1" max="64" value="16">
+        </div>
+        <div class="field">
+          <label for="inputRows">Dài (hàng)</label>
+          <input type="number" id="inputRows" min="1" max="64" value="16">
+        </div>
+        <button id="applySize" class="btn btn-primary">Áp dụng kích thước</button>
+        <span class="divider"></span>
+        <div class="field lock-field">
+          <label for="lockToggle">Khóa canvas</label>
+          <label class="switch">
+            <input type="checkbox" id="lockToggle">
+            <span class="switch-track"><span class="switch-thumb"></span></span>
+          </label>
+        </div>
+        <p class="hint">⚠ Thay đổi kích thước sẽ xóa toàn bộ tranh hiện tại. Bật khóa để chặn mọi chỉnh sửa cho đến khi tắt khóa.</p>
+        <span class="divider"></span>
+        <div class="field">
+          <label>Lưu trữ</label>
+          <div class="btn-row">
+            <button id="exportBtn" class="btn" title="Tải tranh hiện tại về máy dạng file .json">💾 Xuất file</button>
+            <button id="importBtn" class="btn" title="Nạp lại tranh từ file .json đã lưu">📂 Nhập file</button>
+            <button id="exportPngBtn" class="btn" title="Tải tranh hiện tại về máy dạng ảnh .png kèm số hàng/cột">🖼️ Xuất PNG</button>
+            <input type="file" id="importInput" accept="application/json" hidden>
+          </div>
+        </div>
+        <p id="saveStatus" class="hint">💾 Tự động lưu vào trình duyệt này.</p>
+      </section>
+
+      <section id="panel-draw" class="tab-panel">
+        <div class="tool-row">
+          <div class="tools">
+            <button id="undoBtn" class="btn" title="Hoàn tác (Ctrl+Z)">↶ Undo</button>
+            <button id="redoBtn" class="btn" title="Làm lại (Ctrl+Y)">↷ Redo</button>
+            <span class="divider"></span>
+            <button class="tool-btn active" data-tool="pen">✏️ Vẽ</button>
+            <button class="tool-btn" data-tool="fill">🪣 Tô đầy</button>
+            <button class="tool-btn" data-tool="picker">💧 Chọn màu</button>
+            <button class="tool-btn" data-tool="eraser">🧹 Xóa</button>
+            <span class="divider"></span>
+            <button id="clearAll" class="btn btn-danger">Xóa tất cả</button>
+          </div>
+          <div class="colors">
+            <input type="color" id="colorPicker" value="#ff5d8f">
+            <span id="colorLabel">#FF5D8F</span>
+            <div id="palette" class="palette"></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="panel-select" class="tab-panel">
+        <div class="tools">
+          <button class="tool-btn" data-tool="select">🔲 Chọn</button>
+          <button class="tool-btn" data-tool="move">✋ Di chuyển</button>
+          <span class="divider"></span>
+          <button id="deselectBtn" class="btn">✖ Bỏ chọn</button>
+        </div>
+        <p class="hint">Dùng "Chọn" để kéo khoanh vùng các ô màu, sau đó chuyển sang "Di chuyển" để kéo cả vùng đã chọn đến vị trí khác trong canvas.</p>
+      </section>
+
+      <section id="panel-zoom" class="tab-panel">
+        <div class="field">
+          <label for="zoomSlider">Thu / phóng (<span id="zoomLabel">100%</span>)</label>
+          <input type="range" id="zoomSlider" min="50" max="400" step="10" value="100">
+        </div>
+        <button id="zoomResetBtn" class="btn">Đặt lại 100%</button>
+        <span class="divider"></span>
+        <button id="panToggle" class="pan-toggle" data-tool="pan">✋ Di chuyển canvas</button>
+        <p class="hint">Bật "Di chuyển canvas" để kéo xem các phần bị ẩn khi phóng to. Tắt đi để quay lại thao tác vẽ/chọn như bình thường.</p>
+      </section>
+
+    </div>
+  </footer>
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
